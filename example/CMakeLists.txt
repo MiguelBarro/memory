@@ -5,6 +5,11 @@
 
 macro(_foonathan_add_example name)
     add_executable(foonathan_memory_example_${name} ${name}.cpp)
+
+    if(Sanitizers_FOUND)
+        add_sanitize_thread(foonathan_memory_example_${name})
+    endif()
+
     target_link_libraries(foonathan_memory_example_${name} PRIVATE foonathan_memory)
 endmacro()
 

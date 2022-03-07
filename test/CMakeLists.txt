@@ -2,8 +2,12 @@
 # SPDX-License-Identifier: Zlib
 
 # builds test
-
 add_executable(foonathan_memory_profiling benchmark.hpp profiling.cpp)
+
+if(Sanitizers_FOUND)
+    add_sanitize_thread(foonathan_memory_profiling)
+endif()
+
 target_link_libraries(foonathan_memory_profiling foonathan_memory)
 target_include_directories(foonathan_memory_profiling PRIVATE
                             ${FOONATHAN_MEMORY_SOURCE_DIR}/include/foonathan/memory)
@@ -38,6 +42,11 @@ set(tests
     smart_ptr.cpp)
 
 add_executable(foonathan_memory_test ${tests})
+
+if(Sanitizers_FOUND)
+    add_sanitize_thread(foonathan_memory_test)
+endif()
+
 target_link_libraries(foonathan_memory_test PRIVATE foonathan_memory doctest::doctest)
 target_include_directories(foonathan_memory_test PRIVATE
                             ${FOONATHAN_MEMORY_SOURCE_DIR}/include/foonathan/memory)

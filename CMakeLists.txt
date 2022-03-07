@@ -47,6 +47,9 @@ include(cmake/configuration.cmake)
 include(cmake/atomic.cmake)
 include(cmake/get_container_node_sizes.cmake)
 
+# add sanitizer support if available
+find_package(Sanitizers)
+
 # subdirectories
 add_subdirectory(src)
 if(FOONATHAN_MEMORY_BUILD_EXAMPLES)
