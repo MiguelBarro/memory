@@ -7,7 +7,21 @@ macro(_foonathan_add_example name)
     add_executable(foonathan_memory_example_${name} ${name}.cpp)
 
     if(Sanitizers_FOUND)
-        add_sanitize_thread(foonathan_memory_example_${name})
+        if(SANITIZE_THREAD)
+            add_sanitize_thread(foonathan_memory_example_${name})
+        endif(SANITIZE_THREAD)
+
+        if(SANITIZE_ADDRESS)
+            add_sanitize_address(foonathan_memory_example_${name})
+        endif(SANITIZE_ADDRESS)
+
+        if(SANITIZE_MEMORY)
+            add_sanitize_memory(foonathan_memory_example_${name})
+        endif(SANITIZE_MEMORY)
+
+        if(SANITIZE_UNDEFINED)
+            add_sanitize_undefined(foonathan_memory_example_${name})
+        endif(SANITIZE_UNDEFINED)
     endif()
 
     target_link_libraries(foonathan_memory_example_${name} PRIVATE foonathan_memory)

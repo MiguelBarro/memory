@@ -5,7 +5,21 @@
 add_executable(foonathan_memory_node_size_debugger test_types.hpp node_size_debugger.hpp node_size_debugger.cpp)
 
 if(Sanitizers_FOUND)
-    add_sanitize_thread(foonathan_memory_node_size_debugger)
+    if(SANITIZE_THREAD)
+        add_sanitize_thread(foonathan_memory_node_size_debugger)
+    endif(SANITIZE_THREAD)
+
+    if(SANITIZE_ADDRESS)
+        add_sanitize_address(foonathan_memory_node_size_debugger)
+    endif(SANITIZE_ADDRESS)
+
+    if(SANITIZE_MEMORY)
+        add_sanitize_memory(foonathan_memory_node_size_debugger)
+    endif(SANITIZE_MEMORY)
+
+    if(SANITIZE_UNDEFINED)
+        add_sanitize_undefined(foonathan_memory_node_size_debugger)
+    endif(SANITIZE_UNDEFINED)
 endif()
 
 if (CMAKE_CROSSCOMPILING)

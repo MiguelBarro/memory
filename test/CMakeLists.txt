@@ -5,7 +5,21 @@
 add_executable(foonathan_memory_profiling benchmark.hpp profiling.cpp)
 
 if(Sanitizers_FOUND)
-    add_sanitize_thread(foonathan_memory_profiling)
+    if(SANITIZE_THREAD)
+        add_sanitize_thread(foonathan_memory_profiling)
+    endif(SANITIZE_THREAD)
+
+    if(SANITIZE_ADDRESS)
+        add_sanitize_address(foonathan_memory_profiling)
+    endif(SANITIZE_ADDRESS)
+
+    if(SANITIZE_MEMORY)
+        add_sanitize_memory(foonathan_memory_profiling)
+    endif(SANITIZE_MEMORY)
+
+    if(SANITIZE_UNDEFINED)
+        add_sanitize_undefined(foonathan_memory_profiling)
+    endif(SANITIZE_UNDEFINED)
 endif()
 
 target_link_libraries(foonathan_memory_profiling foonathan_memory)
@@ -44,7 +58,21 @@ set(tests
 add_executable(foonathan_memory_test ${tests})
 
 if(Sanitizers_FOUND)
-    add_sanitize_thread(foonathan_memory_test)
+    if(SANITIZE_THREAD)
+        add_sanitize_thread(foonathan_memory_test)
+    endif(SANITIZE_THREAD)
+
+    if(SANITIZE_ADDRESS)
+        add_sanitize_address(foonathan_memory_test)
+    endif(SANITIZE_ADDRESS)
+
+    if(SANITIZE_MEMORY)
+        add_sanitize_memory(foonathan_memory_test)
+    endif(SANITIZE_MEMORY)
+
+    if(SANITIZE_UNDEFINED)
+        add_sanitize_undefined(foonathan_memory_test)
+    endif(SANITIZE_UNDEFINED)
 endif()
 
 target_link_libraries(foonathan_memory_test PRIVATE foonathan_memory doctest::doctest)

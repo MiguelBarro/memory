@@ -83,7 +83,21 @@ endif()
 add_library(foonathan_memory ${detail_header} ${header} ${src})
 
 if(Sanitizers_FOUND)
-    add_sanitize_thread(foonathan_memory)
+    if(SANITIZE_THREAD)
+        add_sanitize_thread(foonathan_memory)
+    endif(SANITIZE_THREAD)
+
+    if(SANITIZE_ADDRESS)
+        add_sanitize_address(foonathan_memory)
+    endif(SANITIZE_ADDRESS)
+
+    if(SANITIZE_MEMORY)
+        add_sanitize_memory(foonathan_memory)
+    endif(SANITIZE_MEMORY)
+
+    if(SANITIZE_UNDEFINED)
+        add_sanitize_undefined(foonathan_memory)
+    endif(SANITIZE_UNDEFINED)
 endif()
 
 target_include_directories(foonathan_memory PUBLIC $<BUILD_INTERFACE:${FOONATHAN_MEMORY_SOURCE_DIR}/include/> # for client in subdirectory
